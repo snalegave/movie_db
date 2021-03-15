@@ -8,4 +8,3 @@ export default function NavBar ({setSelectedTab}) {
       </div>
     )
   }
-  

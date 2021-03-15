@@ -1,0 +1,9 @@
+.MovieContainer {
+  margin: 0.5em;
+  cursor: pointer;
+}
+
+.MovieContainer:hover {
+  opacity: 0.8;
+  box-shadow:
+}
