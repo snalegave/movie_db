@@ -6,6 +6,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { ArrowUp, ArrowDown } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button'
+import MovieDetailsModal from '../components/MovieDetailsModal'
 
 const ITEMS_PER_PAGE = 21;
 
@@ -15,17 +16,24 @@ const ServiceContainer = (props) => {
   const [desc, setDesc] = useState(true);
   const [movies, setMovies] = useState(null);
   const [page, setPage] = useState(1);
+  const [modalShow, setModalShow] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const updateMovies = (data) => {
     setMovies(data);
     setLoading(false);
   }
 
+  const updateModal = (movieData) => {
+    setSelectedMovie(movieData);
+    setModalShow(true);
+  }
+
   const renderMovies = () => {
     if (movies) {
       return (
         movies.map(movie => {
-          return <Movie key={movie.tmdb_id} data={movie} />
+          return <Movie key={movie.tmdb_id} data={movie} onClick={() => updateModal(movie)} />
         })
       )
     }
@@ -71,21 +79,28 @@ const ServiceContainer = (props) => {
         </Dropdown>
       </div>
       <div className={classes.MovieListContainer}>
-      {
-        loading ?
-        <div className={classes.SpinnerContainer}>
-          <Spinner animation="border" role="status">
-            <span className="sr-only">Loading...</span>
-          </Spinner>
-        </div> :
-        renderMovies()
-      }
+        {
+          loading ?
+            <div className={classes.SpinnerContainer}>
+              <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            </div> :
+            renderMovies()
+        }
       </div>
       {
         !loading ? <div className={classes.Footer}>
-          <Button variant="outline-primary" disabled={page === 1} onClick={() => {setPage(page - 1)}}>Prev</Button>
-          <Button variant="outline-primary" onClick={() => {setPage(page + 1)}}>Next</Button>
+          <Button variant="outline-primary" disabled={page === 1} onClick={() => { setPage(page - 1) }}>Prev</Button>
+          <Button variant="outline-primary" onClick={() => { setPage(page + 1) }}>Next</Button>
         </div> : null
+      }
+      {
+        selectedMovie != null ? <MovieDetailsModal
+          show={modalShow}
+          movie={selectedMovie}
+          onHide={() => setModalShow(false)}
+        /> : null
       }
     </div>
   )
