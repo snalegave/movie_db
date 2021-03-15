@@ -9,3 +9,13 @@ export function getMovieService(service, itemsPerPage, page, desc, order, callba
     console.log(error)
   });
 }
+
+export function getIdByName(name, limit, callback) {
+  axios.get(`https://7778crvdmc.execute-api.us-west-2.amazonaws.com/Dev/movie/search?name=${name}&limit=${limit}`)
+  .then(response => {
+    console.log(response)
+    callback(response.data.result)
+  }, error => {
+    console.log(error)
+  });
+}

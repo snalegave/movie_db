@@ -1,0 +1,42 @@
+.MovieListContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.Hidden {
+  display: none;
+}
+
+.SearchBar {
+  border: 1px solid #dfe1e5;
+  border-radius: 1.5em;
+  padding-right: 1em;
+  width: 80%;
+  margin: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.SearchButton {
+  cursor: pointer;
+}
+
+.SearchBar:focus-within {
+  box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+  border-color: transparent;
+}
+
+.Input {
+  border-radius: 1.5em;
+  border-width: 0;
+}
+
+.Input:focus {
+  outline: none;
+  box-shadow: none;
+}
