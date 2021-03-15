@@ -40,3 +40,8 @@
   outline: none;
   box-shadow: none;
 }
+
+.Error {
+  margin: auto;
+  margin-top: 2em;
+}

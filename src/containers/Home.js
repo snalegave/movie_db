@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import "./Home.css";
-import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import classes from './Home.module.css';
 import Movie from "../components/Movie";
 import { Search } from 'react-bootstrap-icons';
 import { getIdByName } from '../API/serviceAPI';
+import MovieDetailsModal from '../components/MovieDetailsModal'
 
 const DEFAULT_LIMIT = 20;
 
 export default function Home() {
+  const [modalShow, setModalShow] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
   const [result, setResult] = useState(null);
   const [input, setInput] = useState("");
+
+  const updateModal = (movieData) => {
+    setSelectedMovie(movieData);
+    setModalShow(true);
+  }
 
   const onSearch = () => {
     if (input.length > 0) {
@@ -22,8 +29,11 @@ export default function Home() {
   }
 
   const renderMovies = () => {
+    if (result.length === 0) {
+      return <h2 className={classes.Error}>No Result Found..</h2>
+    }
     return result.map(movie => {
-      return <Movie key={movie.tmdb_id} data={movie} />
+      return <Movie key={movie.tmdb_id} data={movie} onClick={() => updateModal(movie)} />
     })
   }
 
@@ -45,6 +55,13 @@ export default function Home() {
         result ? <div className={classes.MovieListContainer}>
           {renderMovies()}
         </div> : null
+      }
+      {
+        selectedMovie !== null ? <MovieDetailsModal
+          show={modalShow}
+          movie={selectedMovie}
+          onHide={() => setModalShow(false)}
+        /> : null
       }
     </div>
   );
