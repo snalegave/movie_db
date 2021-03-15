@@ -96,7 +96,7 @@ const ServiceContainer = (props) => {
         </div> : null
       }
       {
-        selectedMovie != null ? <MovieDetailsModal
+        selectedMovie !== null ? <MovieDetailsModal
           show={modalShow}
           movie={selectedMovie}
           onHide={() => setModalShow(false)}
