@@ -7,7 +7,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { ArrowUp, ArrowDown } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button'
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 21;
 
 const ServiceContainer = (props) => {
   const [loading, setLoading] = useState(true);
@@ -46,16 +46,9 @@ const ServiceContainer = (props) => {
     }
   }
 
-
-
   const getMovies = useCallback((service, itemsPerPage, page, desc, order, callback) => {
     getMovieService(service, itemsPerPage, page, desc, order, callback)
   }, [])
-
-  useEffect(() => {
-    console.log("mounted")
-    getMovies(props.service, ITEMS_PER_PAGE, 1, true, "release_date", updateMovies)
-  }, [getMovies, props.service])
 
   useEffect(() => {
     setLoading(true);
@@ -80,16 +73,20 @@ const ServiceContainer = (props) => {
       <div className={classes.MovieListContainer}>
       {
         loading ?
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner> :
+        <div className={classes.SpinnerContainer}>
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        </div> :
         renderMovies()
       }
       </div>
-      <div className={classes.Footer}>
-        <Button variant="outline-primary" disabled={page === 1} onClick={() => {setPage(page - 1)}}>Prev</Button>
-        <Button variant="outline-primary" onClick={() => {setPage(page + 1)}}>Next</Button>
-      </div>
+      {
+        !loading ? <div className={classes.Footer}>
+          <Button variant="outline-primary" disabled={page === 1} onClick={() => {setPage(page - 1)}}>Prev</Button>
+          <Button variant="outline-primary" onClick={() => {setPage(page + 1)}}>Next</Button>
+        </div> : null
+      }
     </div>
   )
 }

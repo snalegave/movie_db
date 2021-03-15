@@ -22,6 +22,12 @@
   align-items: center;
 }
 
+.SpinnerContainer {
+  width: 100;
+  margin: auto;
+  margin-top: 5em;
+}
+
 .Footer {
   display: flex;
   flex-direction: row;
