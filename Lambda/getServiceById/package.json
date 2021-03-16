@@ -1,0 +1,6 @@
+{
+  "name": "service_by_id",
+  "dependencies": {
+    "mssql": "^6.3.1"
+  }
+}

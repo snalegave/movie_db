@@ -1,0 +1,6 @@
+{
+  "name": "movie_service",
+  "dependencies": {
+    "mssql": "^6.3.1"
+  }
+}

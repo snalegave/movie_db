@@ -1,0 +1,6 @@
+{
+  "name": "id_by_name",
+  "dependencies": {
+    "mssql": "^6.3.1"
+  }
+}
