@@ -18,6 +18,7 @@
   margin-bottom: 1em;
   display: flex;
   flex-direction: row;
+
   justify-content: space-between;
   align-items: center;
 }
@@ -26,7 +27,11 @@
   cursor: pointer;
 }
 
-.SearchBar:focus-within {
+.SearchButton:hover {
+  opacity: 0.8;
+}
+
+.SearchBar:focus-within, .SearchBar:hover {
   box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
   border-color: transparent;
 }
