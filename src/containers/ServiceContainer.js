@@ -64,7 +64,7 @@ const ServiceContainer = (props) => {
   }, [order, desc, page, props.service, getMovies])
 
   return (
-    <div>
+    <div className={classes.Container}>
       <div className={classes.Header}>
         <img className={classes.Logo} src={`/image/${props.service}-logo.png`} alt="logo" height={70} />
         <Dropdown>
